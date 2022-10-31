@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.w3.org/1999/xhtml">
+<!--<link rel="stylesheet"  type="text/css" th:href="@{/css/}">-->
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form class="transparent" th:action="@{/persons}" th:object="${person}" th:method="POST">
+    <div class="form-inner">
+        <h3>log in</h3>
+        <label for="username">Name</label>
+        <input type="text" id="username" th:field="*{name}">
+        <label for="password">Password</label>
+        <input id="password" type="password" th:field="*{password}">
+        <!--<input type="checkbox" id="custom-checkbox">-->
+        <!--<label for="custom-checkbox">Запомнить меня</label>-->
+        <input type="submit" value="Submit">
+    </div>
+</form>
+
+</body>
+</html>

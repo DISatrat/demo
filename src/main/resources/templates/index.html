@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en"xmlns:th="http://www.w3.org/1999/xhtml">
+<link rel="stylesheet" type="text/css" th:href="@{/css/index.css}">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="main">
+
+    <div class="header">
+        <a href="#" class="A_header">main</a>
+        <a href="#" class="A_header">catalog</a>
+        <a href="#" class="A_header">basket</a>
+        <a href="#" class="A_header">basket</a>
+        <a href="#" class="A_header">qwertyy</a>
+        <a href="/persons" class="A_header">Show Persons</a>
+        <a href="/Advertisement/Add" class="A_header">Add Advertisement</a>
+    </div>
+
+    <div class="account">
+        <a href="accountForm"><img th:src="@{/css/img/account.jpg}" width="50" height="50" border="0" alt=""></a>
+    </div>
+
+    <div class="reg">
+        <form action="/logout" method="post">
+            <input type="submit" value="Sign out">
+        </form>
+        <a href="persons/registration" class="reg_header">registration</a>
+        <a href="persons/login" class="reg_header">log in</a>
+    </div>
+
+</div>
+    <h1>List Advertisement</h1>
+    <div class="advertisement">
+        <!--<form action="/showAdvertisement"method="get">-->
+            <!--<tr th:each="advertisements : ${advertisement}"></tr>-->
+            <!--<a href="/showAdvertisement"><p th:utext="${advertisements.id}"></p> <img th:src="${advertisements.img}" th:alt="${advertisements.text}"> </a>-->
+        <!--</form>-->
+    </div>
+<a href=""></a>
+</body>
+</html>
