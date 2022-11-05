@@ -21,25 +21,22 @@ public class AdvertisementController {
     public AdvertisementController(AdvertisementsDAO advertisementsDAO){this.advertisementsDAO=advertisementsDAO;}
 
     @GetMapping("/")
-    public String All(Model model){
+    public String findAll(Model model){
         model.addAttribute("advertisement",advertisementsDAO.findAll());
         return "index";
     }
 
     @GetMapping("/Add")
-    public String newPerson(Model model){
+    public String newAdvertisement(Model model){
         model.addAttribute("advertisement",new Advertisement());
         return "add";
     }
     @PostMapping()
-    public String Add(@ModelAttribute Advertisement advertisement){
+    public String saveAdvertisement(@ModelAttribute("advertisement") Advertisement advertisement){
         advertisementsDAO.save(advertisement);
-        return "redirect:/index";
+        return "redirect:/";
+
     }
 
-    @GetMapping()
-    public String Delete(){
-        return "redirect:/";
-    }
 }
 

@@ -32,12 +32,12 @@
 
 </div>
     <h1>List Advertisement</h1>
-    <div class="advertisement">
-        <!--<form action="/showAdvertisement"method="get">-->
-            <!--<tr th:each="advertisements : ${advertisement}"></tr>-->
-            <!--<a href="/showAdvertisement"><p th:utext="${advertisements.id}"></p> <img th:src="${advertisements.img}" th:alt="${advertisements.text}"> </a>-->
-        <!--</form>-->
-    </div>
-<a href=""></a>
+        <div th:each="advertisements : ${advertisement}" class="advertisement">
+            <div class="each_adver">
+                <a th:utext="${advertisements.Kind}" href="/"></a>
+                <a th:utext="${advertisements.description}" href="/"></a>
+                <!--<a  href="/"></a>-->
+            </div>
+        </div>
 </body>
 </html>
