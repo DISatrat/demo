@@ -1,14 +1,14 @@
 package com.example.demo.DAO;
 
 import com.example.demo.Account.Person;
-import org.aspectj.apache.bcel.Repository;
+import com.sun.xml.bind.v2.model.core.ID;
 import org.springframework.data.repository.CrudRepository;
-import org.springframework.data.repository.support.Repositories;
 
 import java.util.Optional;
 
 public interface  PersonDAO extends CrudRepository<Person, Long> {
-Iterable<Person> findAll();
-Optional<Person> findById(Long id);
-Person save(Person person);
+//Iterable<Person> findAll();
+//Optional<Person> findById(Long id);
+//Person save(Person person);
+//void deleteById(Long id);
 }

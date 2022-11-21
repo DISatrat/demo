@@ -1,5 +1,6 @@
 //package com.example.demo.Config;
 //
+//import com.example.demo.DAO.PersonDAO;
 //import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.context.annotation.Configuration;
 //import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -14,8 +15,8 @@
 //@Configuration
 //@EnableWebSecurity
 //public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-//    @Autowired
-//    private DataSource dataSource;
+//   private PersonDAO personDAO;
+//
 //    @Override
 //    protected void configure(HttpSecurity httpSecurity) throws Exception{
 //        httpSecurity
@@ -33,7 +34,7 @@
 //
 //    @Override
 //    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.jdbcAuthentication().dataSource(dataSource).passwordEncoder(NoOpPasswordEncoder.getInstance()).usersByUsernameQuery("select name,password,active from usr where name=?");
+//        auth.jdbcAuthentication().dataSource(personDAO).passwordEncoder(NoOpPasswordEncoder.getInstance()).usersByUsernameQuery("select name,password,active from usr where name=?");
 //
 //    }
 //}

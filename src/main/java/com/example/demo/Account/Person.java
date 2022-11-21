@@ -15,14 +15,14 @@ import java.util.Set;
 public class Person  {
     @Id
    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    private Long id;
     private String name;
     private String password;
 
 
-    public enum Role{
-        ADMIN,USER
-    }
+//    public enum Role{
+//        ADMIN,USER
+//    }
 
 
 }

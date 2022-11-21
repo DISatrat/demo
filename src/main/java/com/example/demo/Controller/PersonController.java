@@ -4,6 +4,7 @@ import com.example.demo.Account.Person;
 
 
 import com.example.demo.DAO.PersonDAO;
+import com.sun.xml.bind.v2.model.core.ID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,11 +27,11 @@ public class PersonController {
         return "PersonList";
 
     }
-    @GetMapping("/{id}")
-    public String showPerson(@PathVariable("id") int id,Model model){
-        model.addAttribute("personShow",service.findAll());
-        return "ShowPerson";
-    }
+//    @GetMapping("/{id}")
+//    public String showPerson(@PathVariable("id") Long id,Model model){
+//        model.addAttribute("personShow",service.findById(id));
+//        return "ShowPerson";
+//    }
 
     @GetMapping("/registration")
     public String newPerson(Model model){
@@ -55,8 +56,11 @@ public class PersonController {
         return "update";
     }
 
-    public String Delete(int id){
-        return null;
+    @PostMapping ("/{id}/delete")
+    public String DeletePerson(@PathVariable(value = "id") long id){
+        Person person=service.findById(id).orElseThrow();
+        service.delete(person);
+        return "redirect:/persons";
     }
 
 
