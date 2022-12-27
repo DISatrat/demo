@@ -52,9 +52,9 @@ public class PersonController {
         return "LogIn";
     }
 
-    public String UpdatePerson(Model model){
-        return "update";
-    }
+//    public String UpdatePerson(Model model){
+//        return "update";
+//    }
 
     @PostMapping ("/{id}/delete")
     public String DeletePerson(@PathVariable(value = "id") long id){
