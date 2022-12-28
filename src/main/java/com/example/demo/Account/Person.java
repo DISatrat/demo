@@ -18,11 +18,11 @@ public class Person  {
     private Long id;
     private String name;
     private String password;
+    private String role="USER";
 
-
-//    public enum Role{
-//        ADMIN,USER
-//    }
+    public enum Role{
+        ADMIN,USER
+    }
 
 
 }
