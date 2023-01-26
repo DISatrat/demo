@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
 <link rel="stylesheet" type="text/css" th:href="@{/css/index.css}">
 <head>
     <meta charset="UTF-8">
@@ -22,10 +22,13 @@
         <a href="accountForm"><img th:src="@{/css/img/account.jpg}" width="50" height="50" border="0" alt=""></a>
     </div>
 
-    <div class="reg">
-        <form action="/logout" method="post">
-            <input type="submit" value="Sign out">
+    <div class="reg" sec:authorize="isAuthenticated()">
+        <form th:action="@{/logout}" th:method="post">
+            <input type="submit" value="Sign Out"/>
         </form>
+    </div>
+    <div sec:authorize="!isAuthenticated" class="reg_1">
+
         <a href="persons/registration" class="reg_header">registration</a>
         <a href="persons/login" class="reg_header">log in</a>
     </div>

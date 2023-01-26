@@ -6,16 +6,18 @@
     <title>Title</title>
 </head>
 <body>
-<form class="transparent" th:action="@{/persons}" th:object="${person}" th:method="POST">
+<form class="transparent" th:action="@{/persons/login}"  id="loginFrom" th:method="POST">
     <div class="form-inner">
         <h3>log in</h3>
         <label for="username">Name</label>
-        <input type="text" id="username" th:field="*{name}">
+        <input type="text" id="username" name="username">
+        <!--<input type="text" id="username" th:field="*{username}">-->
         <label for="password">Password</label>
-        <input id="password" type="password" th:field="*{password}">
+        <input id="password" type="password" name="password">
+        <!--<input id="password" type="password" th:field="*{password}">-->
         <!--<input type="checkbox" id="custom-checkbox">-->
         <!--<label for="custom-checkbox">Запомнить меня</label>-->
-        <input type="submit" value="Submit">
+        <input type="submit" value="Login">
     </div>
 </form>
 

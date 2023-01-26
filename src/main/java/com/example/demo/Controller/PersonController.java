@@ -3,18 +3,31 @@ package com.example.demo.Controller;
 import com.example.demo.Account.Person;
 
 
+import com.example.demo.Account.Role;
 import com.example.demo.DAO.PersonDAO;
+import com.example.demo.Service.PersonService;
 import com.sun.xml.bind.v2.model.core.ID;
+import org.hibernate.mapping.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import java.util.Collections;
+import java.util.Map;
+
 @Controller
 @RequestMapping("persons")
 public class PersonController {
-
+    @Autowired
     private PersonDAO service;
+
+    @Autowired
+    private PersonService PersonService;
+
     @Autowired
     public PersonController(PersonDAO service) {
         this.service = service;
@@ -34,13 +47,20 @@ public class PersonController {
 //    }
 
     @GetMapping("/registration")
-    public String newPerson(Model model){
-        model.addAttribute("person",new Person());
+    public String newPerson( Model model){
+        model.addAttribute("person", new Person());
         return "registration";
     }
 
-    @PostMapping()
-    public String savePerson(@ModelAttribute("person") Person person){
+    @PostMapping("/registration")
+    public String savePerson(@ModelAttribute("person") Person person, Model model) {
+
+//        if(!PersonService.saveUser(person)){
+//            model.addAttribute("usernameError","User exists!");
+//            return "registration";
+//        }
+//
+        person.setRoles(Collections.singleton(Role.USER));
         service.save(person);
         return "redirect:/persons";
 
@@ -62,7 +82,14 @@ public class PersonController {
         service.delete(person);
         return "redirect:/persons";
     }
-
+    @PostMapping("/logout")
+    public String logout(HttpServletRequest request) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null) {
+            request.getSession().invalidate();
+        }
+        return "redirect:/";
+    }
 
     }
 

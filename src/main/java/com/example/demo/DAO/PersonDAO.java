@@ -1,14 +1,15 @@
 package com.example.demo.DAO;
 
 import com.example.demo.Account.Person;
-import com.sun.xml.bind.v2.model.core.ID;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.CrudRepository;
-
-import java.util.Optional;
+import org.springframework.security.core.userdetails.UserDetails;
 
 public interface  PersonDAO extends CrudRepository<Person, Long> {
+
+Person findByName(String name);
+//Person save(Person person);
 //Iterable<Person> findAll();
 //Optional<Person> findById(Long id);
-//Person save(Person person);
 //void deleteById(Long id);
 }
