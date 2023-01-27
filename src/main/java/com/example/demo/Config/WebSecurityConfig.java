@@ -29,9 +29,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.authorizeRequests()
 //                .antMatchers("").authenticated()
-                .antMatchers("/persons").hasAnyRole("ADMIN", "USER")
+                .antMatchers("/persons").hasRole("ADMIN")
                 .and()
-                .formLogin().loginPage("/persons/login")
+                .formLogin().loginPage("/persons/login").defaultSuccessUrl("/")
+
                 .and()
                 .logout().logoutUrl("/logout").logoutSuccessUrl("/");
     }

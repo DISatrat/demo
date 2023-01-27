@@ -20,13 +20,11 @@ import java.util.Collections;
 import java.util.Map;
 
 @Controller
-@RequestMapping("persons")
+@RequestMapping("/persons")
 public class PersonController {
     @Autowired
     private PersonDAO service;
 
-    @Autowired
-    private PersonService PersonService;
 
     @Autowired
     public PersonController(PersonDAO service) {
@@ -34,9 +32,9 @@ public class PersonController {
     }
 
 
-    @GetMapping()
+    @GetMapping("")
     public String index(Model model){
-        model.addAttribute("person",service.findAll());
+        model.addAttribute("person", service.findAll());
         return "PersonList";
 
     }
@@ -60,17 +58,23 @@ public class PersonController {
 //            return "registration";
 //        }
 //
-        person.setRoles(Collections.singleton(Role.USER));
+        person.setRoles(Collections.singleton(Role.ROLE_USER));
         service.save(person);
         return "redirect:/persons";
 
     }
 
     @GetMapping("/login")
-    public String Log(Model model) {
-        model.addAttribute("person",new Person());
+    public String LoginPage(Model model) {
+        //model.addAttribute("personLog");
         return "LogIn";
     }
+//    @GetMapping("/login")
+//    public String Login(@ModelAttribute("personLog") Person person) {
+////        model.addAttribute("person",new Person());
+//        PersonService.loadUserByUsername();
+//        return "LogIn";
+//    }
 
 //    public String UpdatePerson(Model model){
 //        return "update";

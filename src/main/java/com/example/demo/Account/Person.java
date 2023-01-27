@@ -19,25 +19,38 @@ public class Person implements UserDetails {
     private String name;
     private String password;
 
+    public Person(String name, String password, Set<Role> role) {
+        this.name = name;
+        this.password = password;
+        this.role = role;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     @ElementCollection(targetClass = Role.class,fetch = FetchType.EAGER)
     @CollectionTable(name = "person_role",joinColumns = @JoinColumn(name = "person_id"))
     @Enumerated(EnumType.STRING)
     private Set<Role> role;
 
 
-//      public Person() {
-//
-//    }
-//
-
-
-
-
     public void setPassword(String password) {
         this.password = password;
     }
+
     public Set<Role> getRoles() {
         return role;
+    }
+
+    @Override
+    public String getUsername() {
+        return name;
+    }
+
+    @Override
+    public String getPassword() {
+        return password;
     }
 
     public void setRoles(Set<Role> roles) {
@@ -49,15 +62,6 @@ public class Person implements UserDetails {
         return getRoles();
     }
 
-    @Override
-    public String getPassword() {
-        return password;
-    }
-
-    @Override
-    public String getUsername() {
-        return name;
-    }
 
     @Override
     public boolean isAccountNonExpired() {
@@ -76,6 +80,6 @@ public class Person implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return isEnabled();
+        return true;
     }
 }
