@@ -1,14 +1,14 @@
 package com.example.demo.DAO;
 
-import com.example.demo.Account.Person;
+import com.example.demo.domain.Account.Person;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.repository.CrudRepository;
-import org.springframework.security.core.userdetails.UserDetails;
 
-public interface  PersonDAO extends CrudRepository<Person, Long> {
-
+public interface  PersonDAO extends JpaRepository<Person, Long> {
 Person findByName(String name);
-//Person save(Person person);
+Person save(Person person);
+Long findPersonById(Long id);
+
+//Long findByIdAndAuthorities();
 //Iterable<Person> findAll();
 //Optional<Person> findById(Long id);
 //void deleteById(Long id);

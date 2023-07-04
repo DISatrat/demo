@@ -1,36 +1,41 @@
 package com.example.demo.Controller;
 
-import com.example.demo.Account.Person;
-
-
-import com.example.demo.Account.Role;
-import com.example.demo.DAO.PersonDAO;
 import com.example.demo.Service.PersonService;
-import com.sun.xml.bind.v2.model.core.ID;
-import org.hibernate.mapping.Collection;
+import com.example.demo.domain.Account.Person;
+
+
+import com.example.demo.domain.Account.Role;
+import com.example.demo.DAO.AdvertisementsDAO;
+import com.example.demo.DAO.PersonDAO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.converter.json.GsonBuilderUtils;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Collections;
-import java.util.Map;
 
 @Controller
 @RequestMapping("/persons")
 public class PersonController {
-    @Autowired
-    private PersonDAO service;
 
+    private final PersonDAO service;
+    private final AdvertisementsDAO advertisementsDAO;
+    private final PasswordEncoder encoder;
 
+    private final PersonService personService;
     @Autowired
-    public PersonController(PersonDAO service) {
+    public PersonController(PersonDAO service, AdvertisementsDAO advertisementsDAO, PasswordEncoder encoder, PersonService personService) {
         this.service = service;
+        this.advertisementsDAO = advertisementsDAO;
+        this.encoder = encoder;
+        this.personService = personService;
     }
-
 
     @GetMapping("")
     public String index(Model model){
@@ -38,11 +43,6 @@ public class PersonController {
         return "PersonList";
 
     }
-//    @GetMapping("/{id}")
-//    public String showPerson(@PathVariable("id") Long id,Model model){
-//        model.addAttribute("personShow",service.findById(id));
-//        return "ShowPerson";
-//    }
 
     @GetMapping("/registration")
     public String newPerson( Model model){
@@ -51,13 +51,7 @@ public class PersonController {
     }
 
     @PostMapping("/registration")
-    public String savePerson(@ModelAttribute("person") Person person, Model model) {
-
-//        if(!PersonService.saveUser(person)){
-//            model.addAttribute("usernameError","User exists!");
-//            return "registration";
-//        }
-//
+    public String savePerson(@ModelAttribute("person") Person person) {
         person.setRoles(Collections.singleton(Role.ROLE_USER));
         service.save(person);
         return "redirect:/persons";
@@ -66,36 +60,33 @@ public class PersonController {
 
     @GetMapping("/login")
     public String LoginPage(Model model) {
-        //model.addAttribute("personLog");
+        model.addAttribute("personLog",new Person());
         return "LogIn";
     }
-//    @GetMapping("/login")
-//    public String Login(@ModelAttribute("personLog") Person person) {
-////        model.addAttribute("person",new Person());
-//        PersonService.loadUserByUsername();
-//        return "LogIn";
-//    }
 
-//    public String UpdatePerson(Model model){
-//        return "update";
-//    }
 
     @PostMapping ("/{id}/delete")
     public String DeletePerson(@PathVariable(value = "id") long id){
         Person person=service.findById(id).orElseThrow();
+        advertisementsDAO.deleteAllByPersonId(id);
         service.delete(person);
         return "redirect:/persons";
     }
-    @PostMapping("/logout")
-    public String logout(HttpServletRequest request) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (authentication != null) {
-            request.getSession().invalidate();
-        }
-        return "redirect:/";
-    }
+//    @PostMapping("/logout")
+//    public String logout(HttpServletRequest request,@AuthenticationPrincipal Person person) {
+//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//        if (authentication != null) {
+//            request.getSession().invalidate();
+//            System.out.println("ggdgdgdgasfsfs");
+//        }
+//        if(person!=null){
+//            person.setOnline(false);
+//            service.save(person);
+//        }
+//        return "redirect:/";
+//    }
 
-    }
+}
 
 
 

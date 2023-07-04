@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<table border="1">
+    <tr>
+        <th>description </th>
+        <th>kind</th>
+        <th>tag</th>
+    </tr>
+    <tr th:each ="advertisements : ${advertisement}">
+        <td th:utext="${advertisements.Kind}">...</td>
+        <td th:utext="${advertisements.description}">...</td>
+        <td > <p href="" th:utext="${advertisements.tag}">123</p> </td>
+    </tr>
+</body>
+</html>

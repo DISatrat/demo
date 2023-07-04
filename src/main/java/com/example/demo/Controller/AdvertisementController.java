@@ -1,10 +1,11 @@
 package com.example.demo.Controller;
 
-        import com.example.demo.DAO.AdvertisementsDAO;
-        import com.example.demo.domain.Advertisement;
+import com.example.demo.domain.Account.Person;
+import com.example.demo.DAO.AdvertisementsDAO;
+import com.example.demo.Service.PersonService;
+import com.example.demo.domain.Advertisement.Advertisement;
         import org.springframework.beans.factory.annotation.Autowired;
-        import org.springframework.boot.Banner;
-        import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Controller;
         import org.springframework.ui.Model;
         import org.springframework.web.bind.annotation.GetMapping;
         import org.springframework.web.bind.annotation.ModelAttribute;
@@ -15,15 +16,17 @@ package com.example.demo.Controller;
 @RequestMapping("/Advertisement")
 public class AdvertisementController {
 
-    private AdvertisementsDAO advertisementsDAO;
-
+    private final AdvertisementsDAO advertisementsDAO;
+    private final PersonService personService;
     @Autowired
-    public AdvertisementController(AdvertisementsDAO advertisementsDAO){this.advertisementsDAO=advertisementsDAO;}
+    public AdvertisementController(AdvertisementsDAO advertisementsDAO, PersonService personService){this.advertisementsDAO=advertisementsDAO;
+        this.personService = personService;
+    }
 
-    @GetMapping("/")
+    @GetMapping("")
     public String findAll(Model model){
         model.addAttribute("advertisement",advertisementsDAO.findAll());
-        return "index";
+        return "ShowAdvertisement";
     }
 
     @GetMapping("/Add")
@@ -33,6 +36,9 @@ public class AdvertisementController {
     }
     @PostMapping()
     public String saveAdvertisement(@ModelAttribute("advertisement") Advertisement advertisement){
+        String name = personService.getCurrentUsername();
+        Person person = personService.loadUserByUsername(name);
+        advertisement.setPerson(person);
         advertisementsDAO.save(advertisement);
         return "redirect:/";
 

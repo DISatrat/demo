@@ -6,7 +6,7 @@
     <title>Title</title>
 </head>
 <body>
-<form class="transparent" th:action="@{/persons/login}"  id="loginFrom" th:method="POST">
+<form class="transparent" th:action="@{/persons/login}" th:object="${personLog}"  th:method="POST">
     <div class="form-inner">
         <h3>log in</h3>
         <label for="username">Name</label>

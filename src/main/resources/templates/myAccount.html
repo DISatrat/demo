@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <p th:utext="${person.name}"></p>
+    <h1>Description</h1>
+    <p th:utext="${person.description}"></p>
+    <h1>Rating</h1>
+    <p th:utext="${person.rating}"></p>
+    <p>my</p>
+    <table border="1">
+        <tr>
+            <th>description</th>
+            <th>kind</th>
+            <th>tag</th>
+        </tr>
+        <tr th:each="advertisements : ${advertisement}">
+            <td th:utext="${advertisements.Kind}">...</td>
+            <td th:utext="${advertisements.description}">...</td>
+
+            <td><p href="" th:utext="${advertisements.tag}">123</p></td>
+        </tr>
+    </table>
+</body>
+</html>

@@ -1,12 +1,14 @@
 package com.example.demo.DAO;
 
-import com.example.demo.domain.Advertisement;
+import com.example.demo.domain.Advertisement.Advertisement;
 import org.springframework.data.repository.CrudRepository;
 
-import java.util.Optional;
+import javax.transaction.Transactional;
 
-public interface AdvertisementsDAO extends CrudRepository<Advertisement,Long> {
-Iterable<Advertisement> findAll();
-//Optional<Advertisement> findAdvertisementByText();
-Advertisement save(Advertisement advertisement);
+@Transactional
+public interface AdvertisementsDAO extends CrudRepository<Advertisement, Long> {
+    Iterable<Advertisement> findAll();
+    Iterable<Advertisement> findAdvertisementsByTag(String tag);
+    Iterable<Advertisement> findByPersonId(Long id);
+    void deleteAllByPersonId(long id);
 }

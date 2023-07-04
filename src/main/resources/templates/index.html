@@ -10,16 +10,20 @@
 
     <div class="header">
         <a href="#" class="A_header">main</a>
-        <a href="#" class="A_header">catalog</a>
-        <a href="#" class="A_header">basket</a>
         <a href="#" class="A_header">basket</a>
         <a href="#" class="A_header">qwertyy</a>
         <a href="/persons" class="A_header">Show Persons</a>
+
         <a href="/Advertisement/Add" class="A_header">Add Advertisement</a>
+
     </div>
 
     <div class="account">
-        <a href="accountForm"><img th:src="@{/css/img/account.jpg}" width="50" height="50" border="0" alt=""></a>
+        <div sec:authorize="isAuthenticated()">
+
+            <a href="/myAccount/adv"><img th:src="@{/css/img/account.jpg}" width="50" height="50" border="0" alt=""></a>
+
+        </div>
     </div>
 
     <div class="reg" sec:authorize="isAuthenticated()">
@@ -34,13 +38,31 @@
     </div>
 
 </div>
-    <h1>List Advertisement</h1>
-        <div th:each="advertisements : ${advertisement}" class="advertisement">
-            <div class="each_adver">
-                <a th:utext="${advertisements.Kind}" href="/"></a>
-                <a th:utext="${advertisements.description}" href="/"></a>
-                <!--<a  href="/"></a>-->
-            </div>
-        </div>
+
+<div class="search-tag-result">
+    <form th:action="@{/findByTag}" th:method="post">
+        <input type="text" name="tag">
+        <input type="submit" value="find">
+    </form>
+    <form th:action="@{/showAll}" th:method="post">
+        <input type="submit" value="show all advr">
+    </form>
+</div>
+
+<h1>List Advertisement</h1>
+<table border="1">
+    <tr>
+        <th>description</th>
+        <th>kind</th>
+        <th>tag</th>
+    </tr>
+    <tr th:each="advertisements : ${advertisement}">
+        <td th:utext="${advertisements.Kind}">...</td>
+        <td th:utext="${advertisements.description}">...</td>
+        <td><p href="" th:utext="${advertisements.tag}">123</p></td>
+        <td><input type="button" value="add"></td>
+</table>
+
+
 </body>
 </html>

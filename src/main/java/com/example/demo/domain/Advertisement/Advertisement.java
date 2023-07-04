@@ -1,12 +1,9 @@
-package com.example.demo.domain;
+package com.example.demo.domain.Advertisement;
 
+import com.example.demo.domain.Account.Person;
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import java.awt.*;
+import javax.persistence.*;
 
 @Data
 @Entity
@@ -17,5 +14,8 @@ public class Advertisement {
     private String Kind;
     private String description;
     private String tag;
-//    private Image img;
+
+    @ManyToOne
+    @JoinColumn(name = "perosn_id")
+    private Person person;
 }
