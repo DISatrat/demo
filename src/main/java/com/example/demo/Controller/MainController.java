@@ -48,16 +48,24 @@ public class MainController {
         return "myAccount";
     }
 
-    @PostMapping("/findByTag")
-    public String findByTag(@RequestParam("tag") String tag, Model model) {
+    @PostMapping("/")
+    public String findByTag(@RequestParam( value = "tag",required = false) String tag,
+                            @RequestParam(value = "showAll",required = false)String showALl,
+                            Model model) {
+
+        if(showALl!=null || tag.isEmpty()){
+            model.addAttribute("advertisement", advertisementsDAO.findAll());
+        }
+        else {
         model.addAttribute("advertisement", advertisementsDAO.findAdvertisementsByTag(tag));
-        advertisementsDAO.findAdvertisementsByTag(tag);
+        }
+
         return "index";
     }
 
-    @PostMapping("/showAll")
-    public String showAllAdvr(Model model) {
-        model.addAttribute("advertisement", advertisementsDAO.findAll());
-        return "index";
-    }
+//    @PostMapping("/showAll")
+//    public String showAllAdvr(Model model) {
+//        model.addAttribute("advertisement", advertisementsDAO.findAll());
+//        return "index";
+//    }
 }

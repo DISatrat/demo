@@ -28,7 +28,6 @@ public class AccountController {
         String name = personService.getCurrentUsername();
         Person person = personService.loadUserByUsername(name);
         System.out.println("1111111111");
-//        Iterable<Advertisement> advertisements = advertisementsDAO.findAdvertisementsByPerson(person.getId());
         model.addAttribute("advertisement", advertisementsDAO.findByPersonId(person.getId()));
         model.addAttribute("person",person);
 

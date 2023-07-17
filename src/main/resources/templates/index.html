@@ -38,14 +38,16 @@
     </div>
 
 </div>
-
+<!--findByTag-->
+<!--showAll-->
 <div class="search-tag-result">
-    <form th:action="@{/findByTag}" th:method="post">
+    <form th:action="@{/}" th:method="post">
         <input type="text" name="tag">
-        <input type="submit" value="find">
+        <button type="submit" name="findOne" value="find">find</button>
     </form>
-    <form th:action="@{/showAll}" th:method="post">
-        <input type="submit" value="show all advr">
+    <form th:action="@{/}" th:method="post">
+<!--        <input type="submit" name="showAll" value="show all advr">-->
+        <button type="submit" name="showAll" value="true">show all advr</button>
     </form>
 </div>
 

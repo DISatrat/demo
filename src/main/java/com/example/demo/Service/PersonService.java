@@ -32,7 +32,7 @@ public class PersonService implements UserDetailsService {
             throw new UsernameNotFoundException("User not found");
         }
         try {
-            TimeUnit.SECONDS.sleep(3);
+            TimeUnit.SECONDS.sleep(1);//задержка при авторизации
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
